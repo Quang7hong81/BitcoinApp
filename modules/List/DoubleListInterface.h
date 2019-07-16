@@ -1,0 +1,16 @@
+List ListCreate(List_NewNode NewNode,List_FreeNode FreeNode);
+ListNode ListGetHead(List list);
+ListNode ListGetTail(List list);
+ListNode ListGetNext(ListNode node);
+Boolean ListIsEmpty(List list);
+void ListInsertLast(List list, DataType *data);
+void ListInsertFirst(List list,DataType *data);
+void ListRemoveLast(List list);
+void ListRemoveFirst(List list);
+void ListRemove(List list, ListNode node);
+void ListChange(List list, ListNode node,DataType newData);
+ItemType ListGetItem(ListNode node);
+KeyType ListGetKey(ListNode node);
+ListNode ListSearch(List list, DataType data, Compare compare);
+void ListPrint(List list,VisitList visitNode);
+void ListDestroy(List list);
