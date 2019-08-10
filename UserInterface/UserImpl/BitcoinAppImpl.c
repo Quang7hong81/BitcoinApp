@@ -24,9 +24,12 @@ void CreateUser(char* UserID)
 	//To create a user we must just add an empty wallet to the Wallets HashTable
 	Wallet newWallet;
 	newWallet=ListCreate(NEW_BTNode,FREE_BTNode);
-
-	HTInsert(Wallets,UserID,newWallet);
-
+	HTItem *pitem;
+	if(!HTGet(Wallets,UserID,pitem))
+		HTInsert(Wallets,UserID,newWallet);
+	else
+		printf("The User Name is already taken\n");
+	
 }
 void CreateBitcoin(char* BitcoinID,char* UserID,int Amount)
 {
