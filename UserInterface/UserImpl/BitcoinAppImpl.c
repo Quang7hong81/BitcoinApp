@@ -79,6 +79,10 @@ int GetUserAmount(char* UserID)
 			}while((cur=ListGetNext(cur)) != NULL);
 		}
 	}
+	else
+	{
+		printf("Error:User not Found\n");
+	}
 	free(userWallet);
 	return Balance;
 }

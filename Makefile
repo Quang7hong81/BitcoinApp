@@ -1,9 +1,9 @@
 PROGRAM = main
-CFLAGS = -I -Wall -g3
-MODULES = ../modules
-APPMOD = ./UserImpl
+CFLAGS = -I -Wall -g3 -I./UserInterface
+MODULES = ./modules
+APPMOD = ./UserInterface/UserImpl
 CC = gcc
-OBJS = main.o
+OBJS = ./UserInterface/main.o
 
 include $(MODULES)/Bitcoins.inc
 include $(APPMOD)/make.inc
