@@ -29,7 +29,7 @@ void CreateUser(char* UserID)
 		HTInsert(Wallets,UserID,newWallet);
 	else
 		printf("The User Name is already taken\n");
-	
+
 }
 void CreateBitcoin(char* BitcoinID,char* UserID,int Amount)
 {
@@ -62,7 +62,7 @@ void CreateBitcoin(char* BitcoinID,char* UserID,int Amount)
 int GetUserAmount(char* UserID)
 {
 	void* *userWallet=malloc(sizeof(List*)); // The item is a list of leaf bitcoin tree nodes
-	int Balance=-1; //Inistiallize the Balance with a negative (faulse) value so that the client can tell whether the user exists or not
+	int Balance=-1; //Initiallize the Balance with a negative (faulse) value so that the client can tell whether the user exists or not
 	if(HTGet(Wallets,UserID,userWallet) == True)
 	{
 		Balance=0;
@@ -71,7 +71,7 @@ int GetUserAmount(char* UserID)
 			BTItem item;
 			ListNode cur;
 			cur=ListGetHead(*userWallet);
-			
+
 			do
 			{
 				void* node=ListGetItem(cur);//The item of the list is a BTNode
@@ -103,9 +103,9 @@ Boolean Transfer(char *fromUserID, char *toUserID, int Amount)
 
 	if(isValid==1)
 	{
-		//We must do the transaction in parts we will create two new nodes in the sender tree 
+		//We must do the transaction in parts we will create two new nodes in the sender tree
 		//and then if the amount of this bit coin aint enough ,procceed to another
-		//At the same time we must delete the parent node from senders wallet and then Insert the new Nodes we created at the proper wallet 
+		//At the same time we must delete the parent node from senders wallet and then Insert the new Nodes we created at the proper wallet
 		ListNode senderNode;
 		senderNode=ListGetHead(*sender);
 		Transaction *senderTrans=malloc(sizeof(Transaction));
@@ -123,15 +123,15 @@ Boolean Transfer(char *fromUserID, char *toUserID, int Amount)
 		{
 			void* node;
 			node=ListGetItem(senderNode);
-			BTItem item=BTGetItem((BTNode) node),tempItem; 
-			
-			
+			BTItem item=BTGetItem((BTNode) node),tempItem;
+
+
 			//Create the left node and add it to the bitcoin Tree and the toUser.Wallet
 			if(Amount < item.Amount) tempItem.Amount=Amount;//The Amount is less than the amount if the first bitcoinPart the user possesses
 			else tempItem.Amount=item.Amount;
 			tempItem.BitcoinID=item.BitcoinID;
 			tempItem.UserID=toUserID;
-			
+
 			if(HTGet(Bitcoins,item.BitcoinID,bitcoin) == True) BTInsertLeft(*bitcoin,node,tempItem);
 			//Also add this node to the Wallet of toUser
 			data.Item=BTGetChildLeft(*bitcoin,node);
@@ -142,7 +142,7 @@ Boolean Transfer(char *fromUserID, char *toUserID, int Amount)
 			data.Key=toUserID;
 			ListInsertLast(receiverTrans->Details,&data);
 
-			//Do the same for the right child 
+			//Do the same for the right child
 			if(Amount < item.Amount) tempItem.Amount=item.Amount - Amount;//The Amount is less than the amount of the first bitcoinPart the user possesses
 			else tempItem.Amount=0;
 			tempItem.BitcoinID=item.BitcoinID;
@@ -202,9 +202,9 @@ void VisitSent(DataType data)
 	BTItem item=BTGetItem(node);
 	printf("%s -> ",item.UserID );
 	if(HTGet(Bitcoins,item.BitcoinID,Tree) == True) node = BTGetChildLeft(*Tree,node);
-	//we now acknowledge the receiver which is the one that changes each time 
+	//we now acknowledge the receiver which is the one that changes each time
 	item=BTGetItem(node);
-	printf("%s : %d\n",item.UserID,item.Amount); 
+	printf("%s : %d\n",item.UserID,item.Amount);
 	free(Tree);
 }
 void PrintSent(char* UserID)
@@ -234,7 +234,7 @@ void VisitReceived(DataType data)
 	if(HTGet(Bitcoins,item.BitcoinID,Tree) == True) node = BTGetChildLeft(*Tree,node);
 	//we now acknowledge the sender which is the one that changes each time
 	item=BTGetItem(node);
-	printf("%s : %d\n",item.UserID,item.Amount); 
+	printf("%s : %d\n",item.UserID,item.Amount);
 	free(Tree);
 }
 
@@ -246,7 +246,7 @@ void PrintReceived(char* UserID)
 		ListNode cur;
 		cur=ListGetHead(*receiverTrans);
 
-		
+
 		do
 		{
 			Transaction *trans=cur->Data.Item;
@@ -256,22 +256,22 @@ void PrintReceived(char* UserID)
 	free(receiverTrans);
 }
 
-void PrintBitcoinOwners(char* BitcoinID) 
+void PrintBitcoinOwners(char* BitcoinID)
 {
-	//We got to get all the owners at the current state for the Given Bitcoin 
+	//We got to get all the owners at the current state for the Given Bitcoin
 	//So we will get the BitcoinTree from the Bitcoins HashTable
 	//Firstly we will create a list that we will place only the children of the bitcoin tree
 	void **bitcoin=malloc(sizeof(BitcoinTree));
-	
+
 	if(HTGet(Bitcoins,BitcoinID,bitcoin) == True)
 	{
 		List CurrentState;
-		//The item of the list will be pointers to BitcoinTree Nodes  
+		//The item of the list will be pointers to BitcoinTree Nodes
 		//Now we will call a recursive function That will Save the Children Nodes of the Tree (extension to our Binary Tree Module) but wont keep replicas (sums up the Amounts)
-		CurrentState=BTGetAllChildren(*bitcoin); 
+		CurrentState=BTGetAllChildren(*bitcoin);
 		//Now we must print the list
 		printf("BitcoinID:%s Owners: \n",BitcoinID );
-	
+
 		void VisitOwner(DataType Data)
 		{
 			int*item=Data.Item;
@@ -282,7 +282,7 @@ void PrintBitcoinOwners(char* BitcoinID)
 		}
 		ListPrint(CurrentState,VisitOwner);
 		ListDestroy(CurrentState);//Free the list after the creation
-	}	
+	}
 free(bitcoin);
 }
 void PrintBitcoinHistory(char* BitcoinID)
