@@ -66,6 +66,7 @@ static int GetInt(void)
 		}
 		else
 		{
+			while((ch = getchar()) != '\n' && ch!= EOF)
 			return ERROR;
 		}
 	}
@@ -143,8 +144,12 @@ int Act(int option)
 			printf("Enter the Username: ");
 			//Get Username
 			Username = GetString();
-
-			printf("\n%s's Balance: %d\n", Username, GetUserAmount(Username));
+			Amount=GetUserAmount(Username);
+			
+			//if the Amount is negative then the user doesn't exist so display message only when he does.
+			if(Amount >= 0)
+				printf("\n%s's Balance: %d\n", Username, Amount);
+			
 			free(Username);
 		break;
 		case 4:

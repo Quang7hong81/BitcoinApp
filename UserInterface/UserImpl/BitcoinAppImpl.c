@@ -62,9 +62,10 @@ void CreateBitcoin(char* BitcoinID,char* UserID,int Amount)
 int GetUserAmount(char* UserID)
 {
 	void* *userWallet=malloc(sizeof(List*)); // The item is a list of leaf bitcoin tree nodes
-	int Balance=0;
+	int Balance=-1; //Inistiallize the Balance with a negative (faulse) value so that the client can tell whether the user exists or not
 	if(HTGet(Wallets,UserID,userWallet) == True)
 	{
+		Balance=0;
 		if(!ListIsEmpty(*userWallet))
 		{
 			BTItem item;
@@ -81,7 +82,7 @@ int GetUserAmount(char* UserID)
 	}
 	else
 	{
-		printf("Error:User not Found\n");
+		printf("Error:User not Found\n \n");
 	}
 	free(userWallet);
 	return Balance;
