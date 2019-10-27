@@ -35,12 +35,15 @@ int GetChoice(void)
 
 	if(choice < '0' || choice > '9')
 	{
+		char character;
 		printf("Error:Wrong input.Please try again\n");
+		while((character = getchar()) != '\n' && character != EOF){;}
 		return ERROR; //-1 is the value for ERROR
 	}
 	char ch;
 	int counter = 0;
-	while((ch=getchar()) != '\n' && ch != EOF){
+	while((ch=getchar()) != '\n' && ch != EOF)
+	{
 		if(ch!=' ' && ch!='\t')
 			counter++;
 	}
@@ -85,8 +88,9 @@ static char* GetString(void)
 			returnString[pos]=ch;
 			//we copy the current read character to the proper position 
 			pos++;
-			returnString=realloc(returnString,sizeof(char)*pos + 1); 
+			returnString=realloc(returnString,sizeof(char)*pos + 1);
 		}
+	returnString[pos] = '\0';
 	return returnString; 
 }
 

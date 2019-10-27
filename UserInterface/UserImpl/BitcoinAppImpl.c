@@ -10,6 +10,7 @@
 #include "HashTableInterface.h"
 #include "DoubleListInterface.h"
 #include "BTInterface.h"
+
 void Initialize(void)
 {
 	End=0;
