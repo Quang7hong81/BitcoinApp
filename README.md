@@ -1,4 +1,4 @@
-<h1 Bitcoin Transaction System App>
+<h1> Bitcoin Transaction System App </h1>
 
 This program is a part of a semester excercise that my Data Structures and Algorithms teacher assigned us to do.
 
