@@ -5,7 +5,6 @@
 
 This program is a part of a semester excercise that my Data Structures and Algorithms [teacher](https://www.lix.polytechnique.fr/~kostas/) assigned us to do.
 
-Briefing:
 -	The program is supposed to imitate a bitcoin transaction system, in which every bitcoin has a unique ID and starting value and owner.
 -	The bitcoins are implemented as storage for an imaginary coin, that we count in single units.
 -	Each bitcoins is implemented by a tree that keeps track of the current bitcoin owner and the history of the transactions that took place.
