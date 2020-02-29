@@ -3,7 +3,7 @@
 
 ### Briefing
 
-This program is a part of a semester excercise that my Data Structures and Algorithms [teacher](https://www.lix.polytechnique.fr/~kostas/) assigned us to do.
+This program is a part of a semester excercise that my Data Structures and Algorithms [professor](https://www.lix.polytechnique.fr/~kostas/) assigned us to do.
 
 -	The program is supposed to imitate a bitcoin transaction system, in which every bitcoin has a unique ID and starting value and owner.
 -	The bitcoins are implemented as storage for an imaginary coin, that we count in single units.
@@ -43,7 +43,7 @@ So open a terminal CTRL + ALT + T and type:
 ~$ make
 ```
 or for direct install and run
-```
+```shell
 ~$ make run
 ```
 
@@ -51,7 +51,7 @@ or for direct install and run
 
 ## Clean/Uninstall
 
-```
+```shell
 ~$ make clean
 ```
 
